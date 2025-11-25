@@ -551,15 +551,22 @@
             </button>
         </div>
 
-        <!-- Slide 6: Day Confirmation -->
-        <div class="slide scheduling-slide">
-            <h2>So yeah, Sunday it is!</h2>
-            <i class="fas fa-calendar-day large-icon"></i>
-            <div class="day-text">Sunday</div>
-            <p>I'm really looking forward to it!</p>
-            <button class="button" onclick="nextSlide()">
-                Sounds good! <i class="fas fa-arrow-right"></i>
-            </button>
+        <!-- Slide 6: Day Selection -->
+        <div class="slide choice-slide">
+            <h2>When works best for you?</h2>
+            <p>Pick whichever day works better 😊</p>
+            <div class="options-container">
+                <button class="option-button" onclick="selectDay('wednesday')">
+                    <i class="fas fa-moon option-icon"></i>
+                    <div class="option-title">Wednesday Evening</div>
+                    <div class="option-description">Perfect for a mid-week date! 🌙</div>
+                </button>
+                <button class="option-button" onclick="selectDay('saturday')">
+                    <i class="fas fa-calendar-day option-icon"></i>
+                    <div class="option-title">Saturday</div>
+                    <div class="option-description">Weekend vibes! Perfect for relaxing 🎉</div>
+                </button>
+            </div>
         </div>
 
         <!-- Slide 7: Final Confirmation -->
@@ -590,7 +597,7 @@
     <script>
         let currentSlide = 1;
         const totalSlides = 7;
-        let selectedDay = 'Sunday';
+        let selectedDay = null;
         let selectedActivity = null;
 
         // Floating bears spawn
@@ -630,18 +637,7 @@
 
             // Update confirmation message if on slide 7
             if (slideNumber === 7) {
-                const messageEl = document.getElementById('confirmation-message');
-                if (messageEl && selectedActivity) {
-                    let activityText = '';
-                    if (selectedActivity === 'birraporetti') {
-                        activityText = "Birraporetti's";
-                    } else if (selectedActivity === 'puttshack') {
-                        activityText = 'Puttshack';
-                    }
-                    messageEl.textContent = `Can't wait to see you at ${activityText} on ${selectedDay}!`;
-                } else if (messageEl) {
-                    messageEl.textContent = `Can't wait to see you on ${selectedDay}!`;
-                }
+                updateConfirmationMessage();
             }
         }
 
@@ -702,17 +698,43 @@
 
         function selectDay(day) {
             selectedDay = day;
+            // Update confirmation message immediately
+            updateConfirmationMessage();
+            showSlide(7);
+        }
+
+        function updateConfirmationMessage() {
             const messageEl = document.getElementById('confirmation-message');
             if (messageEl) {
-                messageEl.textContent = `Can't wait to see you on ${day}!`;
+                let dayText = '';
+                if (selectedDay === 'wednesday') {
+                    dayText = 'Wednesday evening';
+                } else if (selectedDay === 'saturday') {
+                    dayText = 'Saturday';
+                }
+                
+                let activityText = '';
+                if (selectedActivity === 'birraporetti') {
+                    activityText = "Birraporetti's";
+                } else if (selectedActivity === 'puttshack') {
+                    activityText = 'Puttshack';
+                }
+                
+                if (activityText && dayText) {
+                    messageEl.textContent = `Can't wait to see you at ${activityText} on ${dayText}!`;
+                } else if (dayText) {
+                    messageEl.textContent = `Can't wait to see you on ${dayText}!`;
+                } else {
+                    messageEl.textContent = "Can't wait to see you!";
+                }
             }
-            showSlide(7);
         }
 
         function confirmDate() {
             const phoneNumber = '7134372364';
             let activityText = '';
             let emoji = '';
+            let dayText = '';
             
             if (selectedActivity === 'birraporetti') {
                 activityText = "Birraporetti's";
@@ -722,7 +744,13 @@
                 emoji = '⛳';
             }
             
-            const message = encodeURIComponent(`Hey! I'm totally down for ${activityText} on Sunday! Can't wait to see you there! ${emoji}`);
+            if (selectedDay === 'wednesday') {
+                dayText = 'Wednesday evening';
+            } else if (selectedDay === 'saturday') {
+                dayText = 'Saturday';
+            }
+            
+            const message = encodeURIComponent(`Hey! I'm totally down for ${activityText} on ${dayText}! Can't wait to see you there! ${emoji}`);
             
             // Try different SMS formats for compatibility
             const smsUrl = `sms:${phoneNumber}?body=${message}`;
@@ -732,7 +760,7 @@
         }
 
         function restart() {
-            selectedDay = 'Sunday';
+            selectedDay = null;
             selectedActivity = null;
             showSlide(1);
         }
