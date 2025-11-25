@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan's Special Invitation for Camilla</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #f5deb3 0%, #deb887 25%, #d2b48c 50%, #cd853f 75%, #f5deb3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .decorative-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .lego-brick {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            border-radius: 4px;
+            opacity: 0.15;
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+        }
+
+        .lego-brick:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .lego-brick:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation: float 6s ease-in-out infinite 1s;
+        }
+
+        .lego-brick:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        .lego-brick:nth-child(4) {
+            bottom: 15%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .floating-bear {
+            position: absolute;
+            font-size: 25px;
+            animation: floatUp 4s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .slide {
+            display: none;
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
+            border: 3px solid #8B4513;
+            border-radius: 25px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(139, 69, 19, 0.3);
+            animation: fadeInUp 0.8s ease-in-out;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-slide {
+            background: rgba(255, 248, 220, 0.95);
+            border: 2px solid rgba(160, 82, 45, 0.4);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .welcome-slide h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #8B4513;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .welcome-slide p {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .invitation-slide h2,
+        .reveal-slide h2,
+        .scheduling-slide h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .invitation-slide p,
+        .reveal-slide p,
+        .scheduling-slide p {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .tease-slide {
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+            border: 3px solid #654321;
+        }
+
+        .tease-slide p {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .reveal-slide {
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
+            border: 3px solid #8B4513;
+        }
+
+        .reveal-slide h2 {
+            font-size: 2rem;
+        }
+
+        .reveal-slide p {
+            font-size: 1.3rem;
+        }
+
+        .reveal-slide .icon {
+            font-size: 3rem;
+            color: #8B4513;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .scheduling-slide {
+            background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+            border: 3px solid #654321;
+        }
+
+        .scheduling-slide h2 {
+            font-size: 1.8rem;
+        }
+
+        .scheduling-slide .large-icon {
+            font-size: 4rem;
+            color: #fff;
+            margin: 20px 0;
+        }
+
+        .scheduling-slide .day-text {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .scheduling-slide p {
+            font-size: 1.2rem;
+        }
+
+        .confirmation-slide {
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
+            border: 3px solid #8B4513;
+        }
+
+        .confirmation-slide h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-slide p {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .button {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: #fff;
+            padding: 18px 36px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.5);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .button.secondary {
+            background: linear-gradient(45deg, #654321, #5C4033);
+        }
+
+        .option-button {
+            width: 100%;
+            max-width: 400px;
+            margin: 15px 10px;
+            padding: 25px 30px;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.6);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .option-button:active {
+            transform: translateY(-2px);
+        }
+
+        .option-button .option-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .option-button .option-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .option-button .option-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .choice-slide {
+            background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
+            border: 3px solid #8B4513;
+        }
+
+        .choice-slide h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .choice-slide p {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 15px;
+        }
+
+        .progress-dots {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #8B4513;
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            transform: scale(1.3);
+            background: #A0522D;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .slide {
+                padding: 40px 25px;
+                min-height: 350px;
+            }
+
+            .welcome-slide h1 {
+                font-size: 2.8rem;
+            }
+
+            .invitation-slide h2,
+            .reveal-slide h2 {
+                font-size: 1.8rem;
+            }
+
+            .reveal-slide h2 {
+                font-size: 1.6rem;
+            }
+
+            .scheduling-slide h2 {
+                font-size: 1.5rem;
+            }
+
+            .confirmation-slide h2 {
+                font-size: 2rem;
+            }
+
+            .button {
+                padding: 15px 28px;
+                font-size: 1.1rem;
+            }
+
+            .option-button {
+                padding: 20px 25px;
+                max-width: 100%;
+            }
+
+            .option-button .option-icon {
+                font-size: 2rem;
+            }
+
+            .option-button .option-title {
+                font-size: 1.2rem;
+            }
+
+            .option-button .option-description {
+                font-size: 0.9rem;
+            }
+
+            .choice-slide h2 {
+                font-size: 1.6rem;
+            }
+
+            .choice-slide p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="decorative-elements">
+        <div class="lego-brick"></div>
+        <div class="lego-brick"></div>
+        <div class="lego-brick"></div>
+        <div class="lego-brick"></div>
+    </div>
+
+    <div class="container">
+        <!-- Slide 1: Welcome -->
+        <div class="slide welcome-slide active">
+            <h1>Hey Camilla!</h1>
+            <p>I've got something to ask you...</p>
+            <button class="button" onclick="nextSlide()">
+                Continue <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Slide 2: Invitation -->
+        <div class="slide invitation-slide">
+            <h2>So here's the thing...</h2>
+            <p>I'd love to take you on a date!</p>
+            <button class="button" onclick="nextSlide()">
+                Tell me more <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Slide 3: Tease -->
+        <div class="slide tease-slide">
+            <p>Wanna see what I've got planned?</p>
+            <button class="button" onclick="nextSlide()">
+                Show me what you got! <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Slide 4: Activity Choice -->
+        <div class="slide choice-slide">
+            <h2>I've got two options for you!</h2>
+            <p>Pick whichever sounds more fun to you 😊</p>
+            <div class="options-container">
+                <button class="option-button" onclick="selectActivity('birraporetti')">
+                    <i class="fas fa-utensils option-icon"></i>
+                    <div class="option-title">Birraporetti's</div>
+                    <div class="option-description">Italian restaurant - I know you love pasta! 🍝</div>
+                </button>
+                <button class="option-button" onclick="selectActivity('puttshack')">
+                    <i class="fas fa-golf-ball option-icon"></i>
+                    <div class="option-title">Puttshack</div>
+                    <div class="option-description">Mini golf - fun, competitive, and a great time! ⛳</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Slide 5: Activity Confirmation -->
+        <div class="slide reveal-slide" id="activity-confirmation-slide">
+            <h2 id="activity-title">This is gonna be fun!</h2>
+            <i class="fas fa-utensils icon" id="activity-icon"></i>
+            <p id="activity-description">Great choice! I'm really looking forward to it!</p>
+            <button class="button" onclick="nextSlide()">
+                When are we doing this? <i class="fas fa-calendar"></i>
+            </button>
+        </div>
+
+        <!-- Slide 6: Day Confirmation -->
+        <div class="slide scheduling-slide">
+            <h2>So yeah, Sunday it is!</h2>
+            <i class="fas fa-calendar-day large-icon"></i>
+            <div class="day-text">Sunday</div>
+            <p>I'm really looking forward to it!</p>
+            <button class="button" onclick="nextSlide()">
+                Sounds good! <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Slide 7: Final Confirmation -->
+        <div class="slide confirmation-slide">
+            <h2>Awesome!</h2>
+            <p id="confirmation-message">Can't wait to see you!</p>
+            <p>Let me know if you're in! Just hit that button below 😊</p>
+            <button class="button" onclick="confirmDate()">
+                I'm in! <i class="fas fa-check"></i>
+            </button>
+            <button class="button secondary" onclick="restart()">
+                Start Over <i class="fas fa-redo"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="progress-dots">
+        <div class="dot active" onclick="goToSlide(1)"></div>
+        <div class="dot" onclick="goToSlide(2)"></div>
+        <div class="dot" onclick="goToSlide(3)"></div>
+        <div class="dot" onclick="goToSlide(4)"></div>
+        <div class="dot" onclick="goToSlide(5)"></div>
+        <div class="dot" onclick="goToSlide(6)"></div>
+        <div class="dot" onclick="goToSlide(7)"></div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        let selectedDay = 'Sunday';
+        let selectedActivity = null;
+
+        // Floating bears spawn
+        function spawnBear() {
+            const bear = document.createElement('div');
+            bear.className = 'floating-bear';
+            bear.textContent = '🐻';
+            bear.style.left = Math.random() * 100 + '%';
+            bear.style.bottom = '-50px';
+            document.querySelector('.decorative-elements').appendChild(bear);
+            
+            setTimeout(() => {
+                bear.remove();
+            }, 4000);
+        }
+
+        // Spawn bears every 5 seconds
+        setInterval(spawnBear, 5000);
+
+        function showSlide(slideNumber) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show target slide
+            if (slides[slideNumber - 1]) {
+                slides[slideNumber - 1].classList.add('active');
+            }
+
+            // Update progress dots
+            updateProgressDots(slideNumber);
+
+            // Update current slide
+            currentSlide = slideNumber;
+
+            // Update confirmation message if on slide 7
+            if (slideNumber === 7) {
+                const messageEl = document.getElementById('confirmation-message');
+                if (messageEl && selectedActivity) {
+                    let activityText = '';
+                    if (selectedActivity === 'birraporetti') {
+                        activityText = "Birraporetti's";
+                    } else if (selectedActivity === 'puttshack') {
+                        activityText = 'Puttshack';
+                    }
+                    messageEl.textContent = `Can't wait to see you at ${activityText} on ${selectedDay}!`;
+                } else if (messageEl) {
+                    messageEl.textContent = `Can't wait to see you on ${selectedDay}!`;
+                }
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        function goToSlide(slideNumber) {
+            if (slideNumber >= 1 && slideNumber <= totalSlides) {
+                showSlide(slideNumber);
+            }
+        }
+
+        function updateProgressDots(activeSlide) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if (index + 1 === activeSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function selectActivity(activity) {
+            selectedActivity = activity;
+            
+            // Update slide 5 with the selected activity
+            const titleEl = document.getElementById('activity-title');
+            const iconEl = document.getElementById('activity-icon');
+            const descEl = document.getElementById('activity-description');
+            
+            if (activity === 'birraporetti') {
+                if (titleEl) titleEl.textContent = "Birraporetti's it is!";
+                if (iconEl) {
+                    iconEl.className = 'fas fa-utensils icon';
+                }
+                if (descEl) descEl.textContent = "Perfect! I know you love pasta, so this should be amazing! Can't wait to share a great Italian meal with you 🍝";
+            } else if (activity === 'puttshack') {
+                if (titleEl) titleEl.textContent = "Puttshack sounds awesome!";
+                if (iconEl) {
+                    iconEl.className = 'fas fa-golf-ball icon';
+                }
+                if (descEl) descEl.textContent = "Mini golf is going to be so much fun! Let's see who's the better putter 😄⛳";
+            }
+            
+            // Move to slide 5
+            showSlide(5);
+        }
+
+        function selectDay(day) {
+            selectedDay = day;
+            const messageEl = document.getElementById('confirmation-message');
+            if (messageEl) {
+                messageEl.textContent = `Can't wait to see you on ${day}!`;
+            }
+            showSlide(7);
+        }
+
+        function confirmDate() {
+            const phoneNumber = '7134372364';
+            let activityText = '';
+            let emoji = '';
+            
+            if (selectedActivity === 'birraporetti') {
+                activityText = "Birraporetti's";
+                emoji = '🍝';
+            } else if (selectedActivity === 'puttshack') {
+                activityText = 'Puttshack';
+                emoji = '⛳';
+            }
+            
+            const message = encodeURIComponent(`Hey! I'm totally down for ${activityText} on Sunday! Can't wait to see you there! ${emoji}`);
+            
+            // Try different SMS formats for compatibility
+            const smsUrl = `sms:${phoneNumber}?body=${message}`;
+            
+            // Open SMS/iMessage
+            window.location.href = smsUrl;
+        }
+
+        function restart() {
+            selectedDay = 'Sunday';
+            selectedActivity = null;
+            showSlide(1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Button click animation
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html>
+
