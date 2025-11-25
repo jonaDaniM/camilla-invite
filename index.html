@@ -108,9 +108,14 @@
             z-index: 10;
             max-width: 600px;
             width: 100%;
+            min-height: 500px;
         }
 
         .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: none;
             background: linear-gradient(135deg, #D2691E 0%, #CD853F 100%);
             border: 3px solid #8B4513;
@@ -127,6 +132,7 @@
 
         .slide.active {
             display: flex;
+            z-index: 1;
         }
 
         @keyframes fadeInUp {
